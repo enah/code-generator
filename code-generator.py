@@ -56,7 +56,7 @@ EOF = EOF()
 SOF = SOF()
 
 def add_to_table(file):
-    f = open(file)
+
     try:
         lines = f.readlines()
     except:
@@ -298,6 +298,8 @@ def list_endswith(s, l):
                 return True
     else:
         for e in l:
+            if type(e) == str:
+                continue
             if s.compare() == e.compare():
                 #print(type(s))
                 #print(type(e))
@@ -314,6 +316,8 @@ def list_contains(s, l):
                 return True
     else:
         for e in l:
+            if type(e) == str:
+                continue
             if s.compare() == e.compare():
                 return True
     return False
