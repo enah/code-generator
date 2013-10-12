@@ -11,9 +11,6 @@ table = {}
 def test():
     return (open(files[0])).readlines()
 
-#def tabrepl(matchobj):
-#   return matchobj.group(0) + ' '
-
 class Tab:
     def __init__(self, num):
         self.n = num
@@ -59,15 +56,12 @@ SOF = SOF()
 
 def add_to_table(file):
     f = open(file)
-    #tokens = f.read().decode().replace("\n", " \n ")
-    #tokens = re.sub(r'\n \t+', tabrepl, tokens)
     try:
-        lines = f.readlines()#.replace('\n', '$ ').split()
+        lines = f.readlines()
     except:
         return
     tabspace = 0
     tokens = []
-    ctokens = []
     docstring = False
     for line in lines:
         if line.split() == []:
@@ -117,13 +111,10 @@ def list_endswith(s, l):
     else:
         for e in l:
             if s.compare() == e.compare():
-                #print(type(s))
-                #print(type(e))
                 return True
     return False
 
 def list_contains(s, l):
-    #print("This")
     if type(s) == str:
         for e in l:
             if type(e) != str:
@@ -136,22 +127,12 @@ def list_contains(s, l):
                 return True
     return False
 
-# not used
-def list_is(token, l):
-    for e in l:
-        if token == l:
-            return True
-    return False
-
 def construct_line(t, token, until, no):
     result = ''
     last = token
     counter = 0
-    #print("This")
     while not list_endswith(token, until):
-        #print("This happens")
         if list_contains(token, no):
-            #print("This")
             if counter > 100:
                 return "FAIL"
             counter += 1
@@ -160,7 +141,6 @@ def construct_line(t, token, until, no):
         counter = 0
         result += str(token) + ' '
         last = token
-        #print(str(counter) + ' ' + str(token))
         token = random.choice(t[token])[0]
     return result + str(token)
 
@@ -169,7 +149,6 @@ for file in files:
 
 def dont_fail(t, token, until, no):
     line = construct_line(t, token, until, no)
-    #print("This")
     while line == "FAIL":
         line = construct_line(t, token, until, no)
     return line
